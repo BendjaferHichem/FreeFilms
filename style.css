@@ -246,6 +246,7 @@ main{ position:relative; z-index:3; margin-top:-4.5rem; padding-bottom:3rem; }
   border-radius:6px; overflow:hidden;
   background:var(--bg-panel);
   cursor:pointer;
+  touch-action: pan-x;
   transition:transform .32s var(--ease), box-shadow .32s var(--ease), z-index 0s;
 }
 .card--wide{ width:300px; aspect-ratio:16/9; }
