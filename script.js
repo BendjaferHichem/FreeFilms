@@ -210,7 +210,6 @@ function skeletonRow(){
 
 
 
-
 function enableDragScroll(track){
   let isDown = false, startX = 0, scrollStart = 0, moved = false;
 
@@ -219,10 +218,9 @@ function enableDragScroll(track){
     moved = false;
     startX = e.clientX;
     scrollStart = track.scrollLeft;
-    track.setPointerCapture(e.pointerId);
   });
 
-  track.addEventListener('pointermove', (e) => {
+  window.addEventListener('pointermove', (e) => {
     if(!isDown) return;
     const dx = e.clientX - startX;
     if(Math.abs(dx) > 6) moved = true;
@@ -230,15 +228,15 @@ function enableDragScroll(track){
   });
 
   const endDrag = () => { isDown = false; };
-  track.addEventListener('pointerup', endDrag);
-  track.addEventListener('pointercancel', endDrag);
-  track.addEventListener('pointerleave', endDrag);
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
 
   // Stop a drag from also triggering the card's click-to-open-modal
   track.addEventListener('click', (e) => {
     if(moved){ e.stopPropagation(); e.preventDefault(); }
   }, true);
 }
+
 
 
 
