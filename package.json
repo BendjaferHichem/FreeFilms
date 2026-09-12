@@ -1,0 +1,12 @@
+{
+  "name": "benj-movie",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BENJ.MOVIE — vanilla HTML/CSS/JS streaming UI concept",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

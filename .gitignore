@@ -1,0 +1,17 @@
+# Environment variables (contains your TMDB API KEY!)
+.env
+.env.local
+*.env
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Operating System & IDE junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Vercel deployment cache
+.vercel/
