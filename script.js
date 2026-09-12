@@ -207,6 +207,45 @@ function skeletonRow(){
   return Array.from({length:8}, () => `<div class="card__skel"></div>`).join('');
 }
 
+
+
+
+
+function enableDragScroll(track){
+  let isDown = false, startX = 0, scrollStart = 0, moved = false;
+
+  track.addEventListener('pointerdown', (e) => {
+    isDown = true;
+    moved = false;
+    startX = e.clientX;
+    scrollStart = track.scrollLeft;
+    track.setPointerCapture(e.pointerId);
+  });
+
+  track.addEventListener('pointermove', (e) => {
+    if(!isDown) return;
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 6) moved = true;
+    track.scrollLeft = scrollStart - dx;
+  });
+
+  const endDrag = () => { isDown = false; };
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+  track.addEventListener('pointerleave', endDrag);
+
+  // Stop a drag from also triggering the card's click-to-open-modal
+  track.addEventListener('click', (e) => {
+    if(moved){ e.stopPropagation(); e.preventDefault(); }
+  }, true);
+}
+
+
+
+
+
+
+
 function buildRow(id, title, {seeAll=true, wide=false}={}){
   const section = document.createElement('section');
   section.className = 'row';
@@ -229,6 +268,7 @@ function buildRow(id, title, {seeAll=true, wide=false}={}){
   const track = section.querySelector('.row__track');
   prev.addEventListener('click', () => track.scrollBy({left:-track.clientWidth*0.85, behavior:'smooth'}));
   next.addEventListener('click', () => track.scrollBy({left:track.clientWidth*0.85, behavior:'smooth'}));
+  enableDragScroll(track);
   return section;
 }
 
